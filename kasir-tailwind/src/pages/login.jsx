@@ -1,62 +1,69 @@
-// src/pages/Login.jsx
-import { useState } from "react";
-import Input from "../components/Input";
-import Button from "../components/Button";
+import React from "react";
+import { useForm } from "react-hook-form";
 
-const Login = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
+export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form login:", form);
-    // TODO: Kirim ke API login di backend
+  const onSubmit = (data) => {
+    console.log("Data login:", data);
+    // Lanjutkan ke API login di sini
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white rounded-lg shadow-md w-full max-w-4xl flex">
-        {/* Gambar kiri */}
-        <div className="hidden md:flex w-1/2 bg-blue-500 items-center justify-center text-white p-6 rounded-l-lg">
-          <h2 className="text-2xl font-bold">Kasir App</h2>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-[#F3F4F6] px-4">
+      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+        <h1 className="text-2xl font-bold text-center mb-2 text-blue-600">
+          Kasir App
+        </h1>
+        <p className="text-center text-gray-600 mb-6">Masuk ke akun Anda</p>
 
-        {/* Form login */}
-        <div className="w-full md:w-1/2 p-8">
-          <h1 className="text-2xl font-bold mb-6">Login</h1>
-          <form onSubmit={handleSubmit}>
-            <Input
-              label="Email"
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email
+            </label>
+            <input
               type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
               placeholder="Masukkan email"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              {...register("email", { required: "Email wajib diisi" })}
             />
-            <Input
-              label="Password"
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              placeholder="Masukkan password"
-            />
-            <Button type="submit" text="Login" />
-          </form>
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
 
-          <p className="mt-4 text-sm">
-            Belum punya akun?{" "}
-            <a href="#" className="text-blue-600 hover:underline">
-              Daftar di sini
-            </a>
-          </p>
-        </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="Masukkan password"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              {...register("password", { required: "Password wajib diisi" })}
+            />
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+          >
+            Login
+          </button>
+        </form>
       </div>
     </div>
   );
-};
-
-export default Login;
+}
