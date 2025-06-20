@@ -1,5 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
+localStorage.setItem("isLoggedIn", "true");
+navigate("/dashboard");
 
 export default function Login() {
   const {
@@ -8,9 +12,12 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
     console.log("Data login:", data);
-    // Lanjutkan ke API login di sini
+    // Simulasi login sukses
+    navigate("/dashboard");
   };
 
   return (

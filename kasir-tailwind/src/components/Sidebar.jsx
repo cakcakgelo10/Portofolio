@@ -1,20 +1,24 @@
 import React from "react";
 import { FaHome, FaCashRegister, FaSignOutAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+localStorage.removeItem("isLoggedIn");
+navigate("/");
 
 export default function Sidebar() {
   return (
     <aside className="w-64 h-screen bg-blue-600 text-white p-5 fixed">
       <h2 className="text-2xl font-bold mb-8">Kasir App</h2>
       <nav className="space-y-4">
-        <a href="#" className="flex items-center gap-2 hover:text-gray-300">
+        <Link to="/dashboard" className="flex items-center gap-2 hover:text-gray-300">
           <FaHome /> Dashboard
-        </a>
-        <a href="#" className="flex items-center gap-2 hover:text-gray-300">
+        </Link>
+        <Link to="/transaksi" className="flex items-center gap-2 hover:text-gray-300">
           <FaCashRegister /> Transaksi
-        </a>
-        <a href="#" className="flex items-center gap-2 hover:text-gray-300">
+        </Link>
+        <Link to="/" className="flex items-center gap-2 hover:text-gray-300">
           <FaSignOutAlt /> Logout
-        </a>
+        </Link>
       </nav>
     </aside>
   );

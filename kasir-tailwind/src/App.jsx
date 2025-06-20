@@ -1,9 +1,7 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import Login from "./pages/login";
-import Transaksi from "./pages/Transaksi";
 import Dashboard from "./pages/Dashboard";
+import Transaksi from "./pages/Transaksi";
 
 function App() {
   return (
