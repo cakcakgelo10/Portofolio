@@ -2,9 +2,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-localStorage.setItem("isLoggedIn", "true");
-navigate("/dashboard");
-
 export default function Login() {
   const {
     register,
@@ -16,7 +13,7 @@ export default function Login() {
 
   const onSubmit = (data) => {
     console.log("Data login:", data);
-    // Simulasi login sukses
+    localStorage.setItem("isLoggedIn", "true");
     navigate("/dashboard");
   };
 
